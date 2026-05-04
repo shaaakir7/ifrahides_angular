@@ -1,0 +1,134 @@
+.about-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      padding: 7rem 6rem;
+      background: #FDFAF5;
+    }
+
+    /* Visual */
+    .about-visual {
+      position: relative;
+    }
+    .leather-grid-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      aspect-ratio: 3/4;
+      background: #1A1510;
+      padding: 6px;
+    }
+    .lg-swatch {
+      position: relative; overflow: hidden;
+      display: flex; align-items: flex-end; padding: 0.6rem;
+      cursor: default;
+      transition: filter 0.3s;
+    }
+    .lg-swatch:hover { filter: brightness(1.1); }
+    .lg-swatch.span-2 { grid-column: span 2; }
+    .lg-swatch span {
+      font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase;
+      background: rgba(0,0,0,0.45); color: rgba(255,255,255,0.8);
+      padding: 2px 5px;
+    }
+    .s-tan    { background: #C4956A; }
+    .s-choco  { background: #5C3317; }
+    .s-cognac { background: #8B4513; }
+    .s-plum   { background: #3D1F35; }
+    .s-black  { background: #1A1A1A; }
+    .s-teal   { background: #2E7D7D; }
+    .s-fuxia  { background: #C2185B; }
+
+    .frame-accent {
+      position: absolute;
+      bottom: -1.5rem; right: -1.5rem;
+      width: 75%; height: 75%;
+      border: 1px solid rgba(139,104,68,0.2);
+      z-index: -1;
+    }
+    .badge-est {
+      position: absolute; top: 1.5rem; left: -1.5rem;
+      background: #BF9B5A; padding: 1rem 1.2rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .badge-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 500; color: #1A1510; line-height: 1;
+    }
+    .badge-text {
+      font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(26,21,16,0.7); margin-top: 0.2rem;
+    }
+
+    /* Content */
+    .about-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.15;
+      color: #2C1A0E; margin: 1rem 0 0;
+    }
+    .about-title em { font-style: italic; color: #8B6844; }
+    .gold-divider {
+      width: 50px; height: 1px; background: #BF9B5A; margin: 1.5rem 0;
+    }
+    .about-desc {
+      font-size: 0.9rem; line-height: 1.9;
+      color: #7A6A56; font-weight: 300; margin-bottom: 2rem;
+    }
+
+    /* Partner card */
+    .partner-card {
+      background: #F5F0E8;
+      border: 1px solid rgba(139,104,68,0.15);
+      padding: 1.8rem;
+    }
+    .partner-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+    .partner-role {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #BF9B5A; margin-bottom: 0.3rem;
+    }
+    .partner-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 500; color: #2C1A0E;
+    }
+    .partner-exp {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 500; color: #BF9B5A; line-height: 1; text-align: right;
+    }
+    .partner-exp span { font-size: 0.9rem; display: block; color: #7A6A56; }
+
+    .ornament {
+      display: flex; align-items: center; gap: 1rem; margin: 1rem 0;
+    }
+    .ornament-line { flex: 1; height: 1px; background: rgba(139,104,68,0.2); }
+    .ornament-diamond { width: 6px; height: 6px; background: #BF9B5A; transform: rotate(45deg); }
+
+    .quals { display: flex; flex-direction: column; gap: 0.9rem; }
+    .qual-item {
+      display: flex; gap: 0.8rem; align-items: flex-start;
+    }
+    .qual-icon {
+      color: #BF9B5A; font-size: 1rem; margin-top: 0.1rem; flex-shrink: 0;
+    }
+    .qual-label {
+      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #BF9B5A; margin-bottom: 0.15rem;
+    }
+    .qual-val { font-size: 0.8rem; line-height: 1.6; color: #7A6A56; font-weight: 300; }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    @media (max-width: 900px) {
+      .about-section { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+      .badge-est { left: 0.5rem; }
+    }

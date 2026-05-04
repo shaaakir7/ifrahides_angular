@@ -1,0 +1,93 @@
+.services-section {
+      padding: 7rem 6rem;
+      background: #EDE6D8;
+    }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+    .services-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 300; color: #2C1A0E;
+      line-height: 1.1; margin: 0.8rem 0 0;
+    }
+    .services-title em { font-style: italic; color: #8B6844; }
+    .services-sub {
+      font-size: 0.9rem; line-height: 1.85;
+      color: #7A6A56; font-weight: 300;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(139,104,68,0.12);
+    }
+
+    .service-card {
+      background: #FDFAF5;
+      padding: 2.5rem 2rem;
+      cursor: default;
+      transition: background 0.35s ease, transform 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: #BF9B5A;
+      transform: scaleX(0); transition: transform 0.3s ease;
+    }
+    .service-card:hover { background: #2C1A0E; transform: translateY(-2px); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-card:hover .svc-num { color: rgba(191,155,90,0.15); }
+    .service-card:hover .svc-title { color: #D4B07A; }
+    .service-card:hover .svc-desc { color: rgba(253,250,245,0.55); }
+    .service-card:hover .svc-icon { color: #BF9B5A; opacity: 1; }
+
+    .svc-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem; font-weight: 300;
+      color: rgba(44,26,14,0.07); line-height: 1; margin-bottom: 0.5rem;
+      transition: color 0.35s;
+    }
+    .svc-icon {
+      font-size: 1.4rem; color: #BF9B5A; opacity: 0.5;
+      margin-bottom: 0.8rem; transition: opacity 0.35s;
+    }
+    .svc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 500; color: #2C1A0E;
+      margin-bottom: 0.75rem;
+      transition: color 0.35s;
+    }
+    .svc-desc {
+      font-size: 0.82rem; line-height: 1.8;
+      color: #7A6A56; font-weight: 300;
+      transition: color 0.35s;
+    }
+
+    .callout-strip {
+      margin-top: 3rem;
+      padding: 2rem 2.5rem;
+      background: rgba(191,155,90,0.08);
+      border-left: 2px solid #BF9B5A;
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      color: #5C4228; font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1.15rem; line-height: 1.6;
+    }
+    .callout-strip i { font-size: 1.5rem; color: #BF9B5A; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+
+    @media (max-width: 900px) {
+      .services-section { padding: 4rem 1.5rem; }
+      .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+    }

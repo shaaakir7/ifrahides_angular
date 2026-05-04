@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('tailwindcss');
+
+/* ─── DESIGN TOKENS ─────────────────────────────── */
+:root {
+  --cream: #F5F0E8;
+  --cream-dark: #EDE6D8;
+  --brown-light: #C4A882;
+  --brown: #8B6844;
+  --brown-dark: #5C4228;
+  --espresso: #2C1A0E;
+  --charcoal: #1A1510;
+  --gold: #BF9B5A;
+  --gold-light: #D4B07A;
+  --white: #FDFAF5;
+  --text-muted: #7A6A56;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+/* ─── BASE ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--espresso);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── ANIMATIONS ────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulseGold {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+.animate-fade-up   { animation: fadeInUp 0.8s ease forwards; }
+.animate-fade-in   { animation: fadeIn 0.7s ease forwards; }
+.animate-slide-left { animation: slideInLeft 0.8s ease forwards; }
+.animate-scale-in  { animation: scaleIn 0.7s ease forwards; }
+
+/* ─── SCROLLBAR ─────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ─── TYPOGRAPHY UTILITIES ──────────────────────── */
+.font-display { font-family: var(--font-display) !important; }
+
+/* ─── SECTION EYEBROW ───────────────────────────── */
+.section-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  &::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+}
+
+/* ─── ORNAMENT ──────────────────────────────────── */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .ornament-line { flex: 1; height: 1px; background: rgba(139,104,68,0.2); }
+  .ornament-diamond {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+}
+
+/* ─── GOLD SHIMMER TEXT ─────────────────────────── */
+.gold-shimmer {
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── HERO TEXTURE ──────────────────────────────── */
+.hero-texture {
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 8px,
+      rgba(191,155,90,0.04) 8px,
+      rgba(191,155,90,0.04) 9px
+    ),
+    linear-gradient(135deg, #3D2B1A 0%, #1A1510 60%, #0E0B08 100%);
+}
+
+/* ─── LEATHER SWATCH GRID ───────────────────────── */
+.swatch-label {
+  background: rgba(0,0,0,0.45);
+  color: rgba(255,255,255,0.85);
+  padding: 2px 6px;
+  border-radius: 1px;
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── GALLERY MOSAIC ────────────────────────────── */
+.gallery-mosaic {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 180px);
+  gap: 8px;
+  .mosaic-item {
+    overflow: hidden;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+    &:hover .mosaic-overlay { opacity: 1; }
+    &:hover img { transform: scale(1.06); }
+    img { width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease; }
+    &.span-2-col { grid-column: span 2; }
+    &.span-2-row { grid-row: span 2; }
+  }
+  .mosaic-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(44,26,14,0.7) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    p {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+  }
+}
+
+/* ─── SERVICE CARD HOVER ────────────────────────── */
+.service-card {
+  transition: background 0.3s, transform 0.3s;
+  &:hover {
+    background: var(--espresso) !important;
+    transform: translateY(-2px);
+    .svc-num { color: rgba(191,155,90,0.15) !important; }
+    .svc-title { color: var(--gold-light) !important; }
+    .svc-desc  { color: rgba(253,250,245,0.6) !important; }
+  }
+}
+
+/* ─── TIMELINE DOT ──────────────────────────────── */
+.timeline-dot {
+  &::after {
+    content: '';
+    position: absolute;
+    right: -3.6rem;
+    top: 0.55rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+}
+
+/* ─── CTA BUTTON ────────────────────────────────── */
+.cta-btn {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+  background: transparent;
+  &:hover {
+    background: var(--gold);
+    color: var(--charcoal);
+    transform: translateY(-1px);
+  }
+}
+
+/* ─── MOBILE MENU ───────────────────────────────── */
+.mobile-menu {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  &.open { transform: translateY(0); }
+}
+
+/* ─── SCROLL REVEAL ─────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── RESPONSIVE HELPERS ─────────────────────────── */
+@media (max-width: 768px) {
+  .gallery-mosaic {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    .span-2-col { grid-column: span 1; }
+    .span-2-row { grid-row: span 1; }
+  }
+}

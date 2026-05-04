@@ -1,0 +1,106 @@
+.gallery-section {
+      padding: 7rem 6rem;
+      background: #FDFAF5;
+    }
+
+    .gallery-header { margin-bottom: 2.5rem; }
+    .gallery-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 300; color: #2C1A0E;
+      line-height: 1.1; margin: 0.8rem 0 1rem;
+    }
+    .gallery-title em { font-style: italic; color: #8B6844; }
+    .gallery-sub {
+      font-size: 0.9rem; line-height: 1.85;
+      color: #7A6A56; font-weight: 300; max-width: 560px;
+    }
+
+    /* Filter pills */
+    .filter-pills {
+      display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .pill {
+      padding: 0.4rem 1rem;
+      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+      border: 1px solid rgba(139,104,68,0.25);
+      background: transparent; color: #7A6A56;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .pill:hover, .pill.active {
+      background: #BF9B5A; color: #1A1510; border-color: #BF9B5A;
+    }
+
+    /* Mosaic grid */
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: 6px;
+    }
+    .mosaic-item {
+      position: relative; overflow: hidden; cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+    .mosaic-item:hover { transform: scale(1.02); z-index: 2; }
+    .mosaic-item.span-2-col { grid-column: span 2; }
+    .mosaic-item.span-2-row { grid-row: span 2; }
+
+    .texture-overlay {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          -45deg,
+          transparent 0px, transparent 4px,
+          rgba(255,255,255,0.03) 4px, rgba(255,255,255,0.03) 5px
+        );
+    }
+
+    .item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,21,16,0.85) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1rem;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .item-overlay.visible { opacity: 1; }
+    .item-category {
+      font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #BF9B5A; margin-bottom: 0.25rem;
+    }
+    .item-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: #FDFAF5; font-weight: 300;
+    }
+
+    /* Leather types */
+    .leather-types {
+      display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(139,104,68,0.1);
+    }
+    .type-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #7A6A56;
+    }
+    .type-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    @media (max-width: 900px) {
+      .gallery-section { padding: 4rem 1.5rem; }
+      .gallery-mosaic {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 150px;
+      }
+      .span-2-col, .span-2-row { grid-column: span 1; grid-row: span 1; }
+    }

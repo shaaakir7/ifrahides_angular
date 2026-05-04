@@ -1,0 +1,26 @@
+<section class="timeline-section" id="track-record">
+      <div class="timeline-header">
+        <div class="section-eyebrow reveal">Professional Journey</div>
+        <h2 class="timeline-title reveal delay-1">Track <em>Record</em></h2>
+        <p class="timeline-sub reveal delay-2">
+          Over a decade of hands-on experience across tanneries, global brands, and high-volume leather sourcing.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-track"></div>
+        @for (item of items; track item.years; let i = $index) {
+          <div class="timeline-item reveal" [style.transition-delay]="(i * 0.1) + 's'" [class.active]="item.active">
+            <div class="tl-year">
+              {{ item.years }}
+              <div class="tl-dot"></div>
+            </div>
+            <div class="tl-content">
+              <div class="tl-role">{{ item.role }}</div>
+              <div class="tl-company">{{ item.company }}</div>
+              <p class="tl-desc">{{ item.desc }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </section>

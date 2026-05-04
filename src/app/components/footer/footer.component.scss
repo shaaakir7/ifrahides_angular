@@ -1,0 +1,64 @@
+.footer {
+      background: #2C1A0E;
+      padding: 2.5rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(191,155,90,0.1);
+      gap: 2rem;
+    }
+
+    .footer-left { }
+    .footer-logo {
+      display: flex; align-items: baseline; gap: 0.3rem;
+      letter-spacing: 0.1em; margin-bottom: 0.3rem;
+    }
+    .logo-ifra {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 500; color: #FDFAF5;
+    }
+    .logo-hides {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 300; color: #BF9B5A;
+      letter-spacing: 0.14em;
+    }
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 0.85rem;
+      color: rgba(253,250,245,0.3);
+    }
+
+    .footer-nav {
+      display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+    }
+    .footer-nav a {
+      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(253,250,245,0.35); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: #BF9B5A; }
+
+    .footer-right { text-align: right; }
+    .footer-contact {
+      display: flex; align-items: center; gap: 0.6rem; justify-content: flex-end;
+      margin-bottom: 0.5rem;
+    }
+    .footer-contact a {
+      font-size: 0.78rem; color: rgba(253,250,245,0.5);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: #BF9B5A; }
+    .footer-contact span { color: rgba(191,155,90,0.3); }
+
+    .footer-copy {
+      font-size: 0.65rem; letter-spacing: 0.08em;
+      color: rgba(253,250,245,0.2); line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .footer {
+        flex-direction: column; text-align: center;
+        padding: 2rem 1.5rem; gap: 1.5rem;
+      }
+      .footer-right { text-align: center; }
+      .footer-contact { justify-content: center; flex-wrap: wrap; }
+      .footer-nav { gap: 1rem; }
+    }

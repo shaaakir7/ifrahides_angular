@@ -1,0 +1,28 @@
+<section class="why-section" id="why">
+      <div class="why-header">
+        <div class="section-eyebrow reveal">Why Choose Us</div>
+        <h2 class="why-title reveal delay-1">Our <em>Edge</em></h2>
+      </div>
+
+      <div class="why-grid">
+        @for (item of items; track item.num; let i = $index) {
+          <div class="why-item reveal" [style.transition-delay]="(i * 0.08) + 's'" [class.wide]="item.wide">
+            <div class="why-num">{{ item.num }}</div>
+            <div class="why-body">
+              <div class="why-icon"><i [class]="'ti ' + item.icon"></i></div>
+              <div class="why-name">{{ item.title }}</div>
+              <p class="why-desc">{{ item.desc }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Bottom quote -->
+      <div class="bottom-quote reveal">
+        <div class="bq-bar"></div>
+        <blockquote>
+          "With a strong technical foundation, we assess every supplier not just on price — but on stability, finishing quality, and article specialisation."
+        </blockquote>
+        <div class="bq-attr">— Ifra Hides · Business Profile 2025</div>
+      </div>
+    </section>

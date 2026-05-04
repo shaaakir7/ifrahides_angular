@@ -1,0 +1,113 @@
+<section class="contact-section" id="contact">
+      <!-- Left: Info -->
+      <div class="contact-left">
+        <div class="section-eyebrow reveal">Get in Touch</div>
+        <h2 class="contact-title reveal delay-1">
+          Contact <em>Ifra Hides</em>
+        </h2>
+        <div class="gold-divider reveal delay-2"></div>
+
+        <div class="contact-info reveal delay-2">
+          <div class="info-row">
+            <div class="info-icon"><i class="ti ti-user"></i></div>
+            <div>
+              <div class="info-label">Managing Partner</div>
+              <div class="info-val">Mr. Imran Fareeth</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon"><i class="ti ti-phone"></i></div>
+            <div>
+              <div class="info-label">Phone</div>
+              <a class="info-val info-link" href="tel:+919698629666">+91 96986 29666</a>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon"><i class="ti ti-mail"></i></div>
+            <div>
+              <div class="info-label">Email</div>
+              <a class="info-val info-link" href="mailto:ifrahides@gmail.com">ifrahides&#64;gmail.com</a>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon"><i class="ti ti-map-pin"></i></div>
+            <div>
+              <div class="info-label">Address</div>
+              <div class="info-val">No 2/4, Varalakshmi Nagar, Maduravoyal<br>Chennai – 600095, Tamil Nadu, India</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon"><i class="ti ti-tag"></i></div>
+            <div>
+              <div class="info-label">Specialisation</div>
+              <div class="info-val">Premium Leather Sourcing · Trade Agency<br>Suede · Grain · Nappa · Linings</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="mailto:ifrahides@gmail.com" class="enquire-btn reveal delay-3">
+          <i class="ti ti-send"></i>
+          Send Enquiry
+        </a>
+      </div>
+
+      <!-- Right: Quote + Enquiry form -->
+      <div class="contact-right">
+        <div class="quote-block reveal">
+          <div class="quote-mark">"</div>
+          <p>
+            With a strong technical foundation, we assess every supplier not just on price —
+            <em>but on what truly defines quality.</em>
+          </p>
+          <div class="quote-attr">— Ifra Hides</div>
+        </div>
+
+        <div class="enquiry-form reveal delay-2">
+          <div class="form-title">Quick Enquiry</div>
+
+          @if (submitted()) {
+            <div class="success-msg">
+              <i class="ti ti-circle-check"></i>
+              <span>Thank you! We'll be in touch shortly.</span>
+            </div>
+          } @else {
+            <form (ngSubmit)="onSubmit()" #f="ngForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Your Name</label>
+                  <input type="text" name="name" [(ngModel)]="form.name" required placeholder="Full name">
+                </div>
+                <div class="form-group">
+                  <label>Company</label>
+                  <input type="text" name="company" [(ngModel)]="form.company" placeholder="Company name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" [(ngModel)]="form.email" required placeholder="your@email.com">
+              </div>
+              <div class="form-group">
+                <label>Leather Requirement</label>
+                <select name="type" [(ngModel)]="form.type">
+                  <option value="">Select article type</option>
+                  <option>Suede (Cow / Goat / Split)</option>
+                  <option>Full Grain / Cow Grain</option>
+                  <option>Nubuck</option>
+                  <option>Buff Calf</option>
+                  <option>Goat & Sheep</option>
+                  <option>Multiple / Not Sure</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" [(ngModel)]="form.message" rows="3" placeholder="Briefly describe your requirement..."></textarea>
+              </div>
+              <button type="submit" class="submit-btn">
+                <i class="ti ti-send"></i>
+                Submit Enquiry
+              </button>
+            </form>
+          }
+        </div>
+      </div>
+    </section>

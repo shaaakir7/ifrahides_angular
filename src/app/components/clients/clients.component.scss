@@ -1,0 +1,113 @@
+.clients-section {
+      padding: 7rem 6rem;
+      background: #F5F0E8;
+    }
+
+    .clients-header { margin-bottom: 4rem; }
+    .clients-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 300; color: #2C1A0E;
+      line-height: 1.1; margin: 0.8rem 0 1rem;
+    }
+    .clients-title em { font-style: italic; color: #8B6844; }
+    .clients-sub {
+      font-size: 0.9rem; line-height: 1.85;
+      color: #7A6A56; font-weight: 300; max-width: 560px;
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .client-card {
+      background: #FDFAF5;
+      border: 1px solid rgba(139,104,68,0.12);
+      padding: 2.5rem;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .client-card:hover {
+      box-shadow: 0 8px 32px rgba(44,26,14,0.08);
+      transform: translateY(-2px);
+    }
+    .client-card--dark {
+      background: #2C1A0E;
+      border-color: rgba(191,155,90,0.1);
+    }
+
+    .client-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .client-flag { font-size: 2rem; }
+    .client-origin {
+      font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #BF9B5A; margin-bottom: 0.3rem;
+    }
+    .client-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 300; color: #2C1A0E;
+      line-height: 1;
+    }
+    .client-period {
+      font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #BF9B5A; margin-bottom: 1rem;
+    }
+    .client-desc {
+      font-size: 0.84rem; line-height: 1.85;
+      color: #7A6A56; font-weight: 300; margin-bottom: 1.5rem;
+    }
+
+    .client-metrics {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(139,104,68,0.1);
+    }
+    .metric { }
+    .metric-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; color: #2C1A0E; font-weight: 500; line-height: 1;
+    }
+    .metric-val sup { font-size: 0.9rem; }
+    .metric-key {
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #7A6A56; margin-top: 0.2rem;
+    }
+    .metric-sep { width: 1px; height: 32px; background: rgba(139,104,68,0.15); }
+
+    /* Pioneer expanded card */
+    .pioneer-inner {
+      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: start;
+    }
+    .pioneer-accounts {
+      min-width: 180px;
+    }
+    .acc-label {
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #BF9B5A; margin-bottom: 0.8rem;
+    }
+    .acc-list {
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .acc-list span {
+      font-size: 0.78rem; color: rgba(253,250,245,0.5);
+      border-left: 1px solid rgba(191,155,90,0.3);
+      padding-left: 0.7rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .acc-list span:hover { color: #D4B07A; border-color: #BF9B5A; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    @media (max-width: 900px) {
+      .clients-section { padding: 4rem 1.5rem; }
+      .clients-grid { grid-template-columns: 1fr; }
+      .client-card { grid-column: span 1 !important; }
+      .pioneer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }

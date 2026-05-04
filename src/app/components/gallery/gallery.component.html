@@ -1,0 +1,55 @@
+<section class="gallery-section" id="gallery">
+      <div class="gallery-header">
+        <div class="section-eyebrow reveal">Leather Range</div>
+        <h2 class="gallery-title reveal delay-1">
+          The <em>Collection</em>
+        </h2>
+        <p class="gallery-sub reveal delay-2">
+          Sourced from India's finest tanneries — suedes, grain, nubuck, buff calf, goat and sheep. Each hide tells a story of craft.
+        </p>
+      </div>
+
+      <!-- Category filter pills -->
+      <div class="filter-pills reveal delay-3">
+        @for (cat of categories; track cat) {
+          <button
+            class="pill"
+            [class.active]="activeCategory() === cat"
+            (click)="setCategory(cat)">
+            {{ cat }}
+          </button>
+        }
+      </div>
+
+      <!-- Gallery mosaic -->
+      <div class="gallery-mosaic reveal delay-4">
+        @for (item of filteredItems(); track item.label; let i = $index) {
+          <div
+            class="mosaic-item"
+            [class.span-2-col]="item.span === 'col'"
+            [class.span-2-row]="item.span === 'row'"
+            [style.background]="item.bg"
+            (mouseenter)="hoveredItem.set(i)"
+            (mouseleave)="hoveredItem.set(-1)">
+            <!-- Leather texture overlay -->
+            <div class="texture-overlay" [style]="item.texture"></div>
+
+            <!-- Info overlay -->
+            <div class="item-overlay" [class.visible]="hoveredItem() === i">
+              <div class="item-category">{{ item.category }}</div>
+              <div class="item-label">{{ item.label }}</div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Leather types legend -->
+      <div class="leather-types reveal">
+        @for (t of leatherTypes; track t.name) {
+          <div class="type-item">
+            <div class="type-dot" [style.background]="t.color"></div>
+            <span>{{ t.name }}</span>
+          </div>
+        }
+      </div>
+    </section>
