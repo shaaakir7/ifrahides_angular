@@ -45,10 +45,20 @@
           </div>
         </div>
 
-        <a href="mailto:ifrahides@gmail.com" class="enquire-btn reveal delay-3">
-          <i class="ti ti-send"></i>
-          Send Enquiry
-        </a>
+        <div class="dual-enquire-container reveal delay-3">
+          <div class="main-enquire-btn">
+            <i class="ti ti-message"></i>
+            <span>Send Enquiry</span>
+          </div>
+          <div class="enquire-actions">
+            <a href="mailto:ifrahides@gmail.com" class="action-item email" title="Send Email">
+              <i class="ti ti-mail"></i>
+            </a>
+            <a href="https://wa.me/919698629666" target="_blank" class="action-item whatsapp" title="Chat on WhatsApp">
+              <i class="ti ti-brand-whatsapp"></i>
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- Right: Quote + Enquiry form -->
@@ -71,40 +81,84 @@
               <span>Thank you! We'll be in touch shortly.</span>
             </div>
           } @else {
-            <form (ngSubmit)="onSubmit()" #f="ngForm">
+            <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" [class.loading-active]="isLoading()">
+              
+              <!-- Leather Loader Overlay -->
+              @if (isLoading()) {
+                <div class="leather-loader-overlay">
+                  <div class="loader-content">
+                    <div class="hide-icon">
+                      <svg viewBox="0 0 100 100" class="rotating-hide">
+                        <path d="M50 5 C25 5, 10 20, 10 40 C10 60, 20 75, 40 85 C45 88, 55 88, 60 85 C80 75, 90 60, 90 40 C90 20, 75 5, 50 5" fill="none" stroke="#BF9B5A" stroke-width="2" />
+                      </svg>
+                    </div>
+                    <span>Sending Enquiry...</span>
+                  </div>
+                </div>
+              }
+
               <div class="form-row">
                 <div class="form-group">
-                  <label>Your Name</label>
-                  <input type="text" name="name" [(ngModel)]="form.name" required placeholder="Full name">
+                  <label>Your Name *</label>
+                  <input type="text" name="name" [(ngModel)]="form.name" required #name="ngModel" placeholder="Full name">
+                  @if (name.invalid && name.touched) { <span class="error-text">Name is required</span> }
                 </div>
                 <div class="form-group">
                   <label>Company</label>
                   <input type="text" name="company" [(ngModel)]="form.company" placeholder="Company name">
                 </div>
               </div>
+
               <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" [(ngModel)]="form.email" required placeholder="your@email.com">
+                <label>Email *</label>
+                <input type="email" name="email" [(ngModel)]="form.email" required email #email="ngModel" placeholder="your@email.com">
+                @if (email.invalid && email.touched) { <span class="error-text">Valid email is required</span> }
               </div>
+
               <div class="form-group">
-                <label>Leather Requirement</label>
-                <select name="type" [(ngModel)]="form.type">
-                  <option value="">Select article type</option>
-                  <option>Suede (Cow / Goat / Split)</option>
-                  <option>Full Grain / Cow Grain</option>
-                  <option>Nubuck</option>
-                  <option>Buff Calf</option>
-                  <option>Goat & Sheep</option>
-                  <option>Multiple / Not Sure</option>
-                </select>
+                <label>Leather Requirement *</label>
+                <div class="custom-multi-select" [class.open]="isDropdownOpen()">
+                  <div class="select-trigger" (click)="isDropdownOpen.set(!isDropdownOpen())">
+                    <div class="selected-tags">
+                      @if (form.types.length === 0) {
+                        <span class="placeholder">Select one or more articles</span>
+                      } @else {
+                        @for (type of form.types; track type) {
+                          <span class="tag">
+                            {{ type }}
+                            <i class="ti ti-x" (click)="$event.stopPropagation(); toggleType(type)"></i>
+                          </span>
+                        }
+                      }
+                    </div>
+                    <i class="ti ti-chevron-down arrow"></i>
+                  </div>
+
+                  @if (isDropdownOpen()) {
+                    <div class="select-options shadow-lg">
+                      @for (opt of options; track opt) {
+                        <div class="option" 
+                             [class.selected]="form.types.includes(opt)"
+                             (click)="toggleType(opt)">
+                          <span class="opt-text">{{ opt }}</span>
+                          @if (form.types.includes(opt)) {
+                            <i class="ti ti-check"></i>
+                          }
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
               </div>
+
               <div class="form-group">
                 <label>Message</label>
                 <textarea name="message" [(ngModel)]="form.message" rows="3" placeholder="Briefly describe your requirement..."></textarea>
               </div>
-              <button type="submit" class="submit-btn">
+
+              <button type="submit" class="submit-btn" [disabled]="f.form.invalid || isLoading()">
                 <i class="ti ti-send"></i>
-                Submit Enquiry
+                {{ isLoading() ? 'Processing...' : 'Submit Enquiry' }}
               </button>
             </form>
           }
