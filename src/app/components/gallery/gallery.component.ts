@@ -1,12 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 interface GalleryItem {
   label: string;
   category: string;
-  bg: string;
-  texture: string;
-  span?: string;
+  image: string;
 }
 
 @Component({
@@ -16,49 +15,72 @@ interface GalleryItem {
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss'
 })
-export class GalleryComponent {
-  hoveredItem = signal(-1);
+export class GalleryComponent implements OnInit {
+  private http = inject(HttpClient);
+
+  // State Signals
+  allItems = signal<GalleryItem[]>([]);
+  filteredItems = signal<GalleryItem[]>([]);
   activeCategory = signal('All');
+  hoveredItem = signal(-1);
 
-  categories = ['All', 'Suede', 'Grain', 'Nubuck', 'Goat & Sheep'];
+  // Lightbox Signals
+  isModalOpen = signal(false);
+  currentIndex = signal(0);
 
-  allItems: GalleryItem[] = [
-    { label: 'Tan Suede', category: 'Suede', bg: '#C4956A', texture: '', span: 'col' },
-    { label: 'Black Full Grain', category: 'Grain', bg: '#1A1A1A', texture: '' },
-    { label: 'Chocolate Suede', category: 'Suede', bg: '#5C3317', texture: '' },
-    { label: 'Cognac Grain', category: 'Grain', bg: '#8B5A2B', texture: '', span: 'row' },
-    { label: 'Aubergine Suede', category: 'Suede', bg: '#3D1F35', texture: '' },
-    { label: 'Camel Nubuck', category: 'Nubuck', bg: '#D4AA7D', texture: '', span: 'col' },
-    { label: 'Oxblood', category: 'Grain', bg: '#4A0E0E', texture: '' },
-    { label: 'Teal Suede', category: 'Suede', bg: '#2E7D7D', texture: '' },
-    { label: 'Fuchsia Suede', category: 'Suede', bg: '#C2185B', texture: '' },
-    { label: 'Lavender Goat', category: 'Goat & Sheep', bg: '#7B68A6', texture: '' },
-    { label: 'Burgundy Grain', category: 'Grain', bg: '#6B1A2A', texture: '' },
-    { label: 'Beige Suede', category: 'Suede', bg: '#D4C5A9', texture: '' },
-    { label: 'Plum Suede', category: 'Suede', bg: '#6B3456', texture: '' },
-    { label: 'Espresso Grain', category: 'Grain', bg: '#2F1A0D', texture: '' },
-    { label: 'Lime Nappa', category: 'Goat & Sheep', bg: '#7CB342', texture: '' },
-    { label: 'Deep Red Suede', category: 'Suede', bg: '#8B1A1A', texture: '' },
-  ];
+  categories = signal<string[]>(['All']);
 
-  filteredItems = signal(this.allItems);
+  private readonly SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbysW8z2c1zpTmwI2i1MxnUsWZExQIcy55u_qBNmQ2vX0v3Br9jfiQYwQUGreooXMQkR/exec';
 
-  leatherTypes = [
-    { name: 'Cow Suede / Split Suede', color: '#C4956A' },
-    { name: 'Goat Suede', color: '#D4AA7D' },
-    { name: 'Cow Full Grain', color: '#5C3317' },
-    { name: 'Cow Grain', color: '#8B5A2B' },
-    { name: 'Nubuck', color: '#C4A165' },
-    { name: 'Buff Calf', color: '#D4C5A9' },
-    { name: 'Goat & Sheep', color: '#7B68A6' },
-  ];
+  ngOnInit() {
+    this.fetchGallery();
+  }
+
+  fetchGallery() {
+    this.http.get<GalleryItem[]>(this.SCRIPT_URL).subscribe({
+      next: (data) => {
+        this.allItems.set(data);
+        this.filteredItems.set(data);
+        
+        // Dynamically extract unique categories from the data
+        const uniqueCategories = [...new Set(data.map(item => item.category))];
+        this.categories.set(['All', ...uniqueCategories]);
+      },
+      error: (err) => {
+        console.error('Gallery Fetch Error:', err);
+      }
+    });
+  }
 
   setCategory(cat: string) {
     this.activeCategory.set(cat);
     if (cat === 'All') {
-      this.filteredItems.set(this.allItems);
+      this.filteredItems.set(this.allItems());
     } else {
-      this.filteredItems.set(this.allItems.filter(i => i.category === cat));
+      this.filteredItems.set(this.allItems().filter(i => i.category === cat));
     }
+  }
+
+  openLightbox(index: number) {
+    this.currentIndex.set(index);
+    this.isModalOpen.set(true);
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeLightbox() {
+    this.isModalOpen.set(false);
+    document.body.style.overflow = 'auto';
+  }
+
+  nextImage(event?: Event) {
+    event?.stopPropagation();
+    const next = (this.currentIndex() + 1) % this.filteredItems().length;
+    this.currentIndex.set(next);
+  }
+
+  prevImage(event?: Event) {
+    event?.stopPropagation();
+    const prev = (this.currentIndex() - 1 + this.filteredItems().length) % this.filteredItems().length;
+    this.currentIndex.set(prev);
   }
 }

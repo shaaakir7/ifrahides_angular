@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -12,17 +12,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContactComponent {
   private http = inject(HttpClient);
+  
+  @ViewChild('dropdownContainer') dropdownContainer!: ElementRef;
 
   submitted = signal(false);
   isLoading = signal(false);
   isDropdownOpen = signal(false);
-  
-  form = { 
-    name: '', 
-    company: '', 
-    email: '', 
+
+  form = {
+    name: '',
+    company: '',
+    email: '',
+    phone: '', // Added Phone
     types: [] as string[],
-    message: '' 
+    message: ''
   };
 
   options = [
@@ -34,6 +37,14 @@ export class ContactComponent {
     'Lining Leather'
   ];
 
+  // Close dropdown when clicking outside of the dropdown container specifically
+  @HostListener('document:mousedown', ['$event'])
+  clickout(event: any) {
+    if (this.isDropdownOpen() && this.dropdownContainer && !this.dropdownContainer.nativeElement.contains(event.target)) {
+      this.isDropdownOpen.set(false);
+    }
+  }
+
   toggleType(type: string) {
     const index = this.form.types.indexOf(type);
     if (index > -1) {
@@ -44,7 +55,7 @@ export class ContactComponent {
   }
 
   // Replace this with your actual Google Apps Script Web App URL after deployment
-  private readonly SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxv6VhQ4wPRjqggLZd8xltWrR1LumadOIjmwKSJbyzTw4Va4-b3oGamXqU5HAtjDBc/exec';
+  private readonly SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLr3x59AQv_0IFHE5t9eDYhcxC-WUDgrGMn0CYF0Bp103SCu903FYH539b4Fvvfgjl/exec';
 
   onSubmit() {
     this.isLoading.set(true);
@@ -64,7 +75,7 @@ export class ContactComponent {
       error: (err) => {
         console.error('Error sending enquiry', err);
         this.isLoading.set(false);
-        // Show error or success anyway for demo
+        // Show error or success anyway for demo if it's just CORS
         this.submitted.set(true);
       }
     });

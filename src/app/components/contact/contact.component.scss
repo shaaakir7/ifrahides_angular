@@ -242,7 +242,7 @@
     .delay-2 { transition-delay: 0.2s; }
     .delay-3 { transition-delay: 0.35s; }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       .contact-section { grid-template-columns: 1fr; }
       .contact-left { padding: 4rem 1.5rem; border-right: none; border-bottom: 1px solid rgba(191,155,90,0.1); }
       .contact-right { padding: 3rem 1.5rem; }

@@ -11,7 +11,7 @@
 
       <!-- Category filter pills -->
       <div class="filter-pills reveal delay-3">
-        @for (cat of categories; track cat) {
+        @for (cat of categories(); track cat) {
           <button
             class="pill"
             [class.active]="activeCategory() === cat"
@@ -21,35 +21,49 @@
         }
       </div>
 
-      <!-- Gallery mosaic -->
-      <div class="gallery-mosaic reveal delay-4">
+      <!-- Gallery Grid -->
+      <div class="gallery-grid reveal delay-4">
         @for (item of filteredItems(); track item.label; let i = $index) {
           <div
-            class="mosaic-item"
-            [class.span-2-col]="item.span === 'col'"
-            [class.span-2-row]="item.span === 'row'"
-            [style.background]="item.bg"
+            class="gallery-card"
             (mouseenter)="hoveredItem.set(i)"
-            (mouseleave)="hoveredItem.set(-1)">
-            <!-- Leather texture overlay -->
-            <div class="texture-overlay" [style]="item.texture"></div>
+            (mouseleave)="hoveredItem.set(-1)"
+            (click)="openLightbox(i)">
+            
+            <img [src]="item.image" [alt]="item.label" class="gallery-img">
 
             <!-- Info overlay -->
             <div class="item-overlay" [class.visible]="hoveredItem() === i">
-              <div class="item-category">{{ item.category }}</div>
-              <div class="item-label">{{ item.label }}</div>
+              <div class="overlay-content">
+                <span class="item-category">{{ item.category }}</span>
+                <h3 class="item-label">{{ item.label }}</h3>
+                <div class="view-btn">View Details</div>
+              </div>
             </div>
           </div>
         }
       </div>
 
-      <!-- Leather types legend -->
-      <div class="leather-types reveal">
-        @for (t of leatherTypes; track t.name) {
-          <div class="type-item">
-            <div class="type-dot" [style.background]="t.color"></div>
-            <span>{{ t.name }}</span>
+      <!-- Lightbox Modal -->
+      @if (isModalOpen()) {
+        <div class="lightbox" (click)="closeLightbox()">
+          <button class="close-btn" (click)="closeLightbox()">&times;</button>
+          
+          <button class="nav-btn prev" (click)="prevImage($event)">
+            <i class="ti ti-chevron-left"></i>
+          </button>
+
+          <div class="lightbox-content" (click)="$event.stopPropagation()">
+            <img [src]="filteredItems()[currentIndex()].image" [alt]="filteredItems()[currentIndex()].label">
+            <div class="lightbox-caption">
+              <h3>{{ filteredItems()[currentIndex()].label }}</h3>
+              <p>{{ filteredItems()[currentIndex()].category }}</p>
+            </div>
           </div>
-        }
-      </div>
+
+          <button class="nav-btn next" (click)="nextImage($event)">
+            <i class="ti ti-chevron-right"></i>
+          </button>
+        </div>
+      }
     </section>
