@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContactComponent {
   private http = inject(HttpClient);
-  
+
   @ViewChild('dropdownContainer') dropdownContainer!: ElementRef;
 
   submitted = signal(false);
@@ -55,7 +55,7 @@ export class ContactComponent {
   }
 
   // Replace this with your actual Google Apps Script Web App URL after deployment
-  private readonly SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLr3x59AQv_0IFHE5t9eDYhcxC-WUDgrGMn0CYF0Bp103SCu903FYH539b4Fvvfgjl/exec';
+  private readonly SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynheToIPaSKhd2VHqkBeVrWBWhlti_fz07vJUaSI3bLD_STqu1uagZ0JwdM6fMOfPS/exec';
 
   onSubmit() {
     this.isLoading.set(true);
