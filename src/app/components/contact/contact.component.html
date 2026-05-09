@@ -121,8 +121,9 @@
           <div class="form-group">
             <label>Phone Number *</label>
             <input type="tel" name="phone" [(ngModel)]="form.phone" required #phone="ngModel"
-              placeholder="+91 98765 43210">
-            @if (phone.invalid && phone.touched) { <span class="error-text">Phone number is required</span> }
+              placeholder="+91 98765 43210" pattern="[0-9]*" inputmode="numeric" (keypress)="onlyNumbers($event)"
+              (input)="filterNumbers($event)">
+            @if (phone.invalid && phone.touched) { <span class="error-text">Please enter numbers only</span> }
           </div>
         </div>
 

@@ -45,6 +45,21 @@ export class ContactComponent {
     }
   }
 
+  // Restrict phone input to numbers only
+  onlyNumbers(event: any) {
+    const pattern = /[0-9]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if (event.charCode !== 0 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
+  filterNumbers(event: any) {
+    const input = event.target;
+    input.value = input.value.replace(/[^0-9]/g, '');
+    this.form.phone = input.value;
+  }
+
   toggleType(type: string) {
     const index = this.form.types.indexOf(type);
     if (index > -1) {
@@ -55,7 +70,7 @@ export class ContactComponent {
   }
 
   // Replace this with your actual Google Apps Script Web App URL after deployment
-  private readonly SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynheToIPaSKhd2VHqkBeVrWBWhlti_fz07vJUaSI3bLD_STqu1uagZ0JwdM6fMOfPS/exec';
+  private readonly SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwTLzAUziONrTRfXgVU--FIlYwcYdSalrjkv-XnPZpNruiOzUMx8XxETV367APEBZ2_/exec';
 
   onSubmit() {
     this.isLoading.set(true);
